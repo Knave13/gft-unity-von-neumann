@@ -35,11 +35,7 @@ public class SolarSystem : MonoBehaviour {
 
 	public void CreateSolarSystem(Star star)
 	{
-		// var gameObject = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-		// gameObject.transform.position = Vector3.zero;
-		// gameObject.name = star.StarName;
-		// gameObject.transform.SetParent(this.transform);
-
+		Random.InitState(Galaxy.Instance.seedNumber);
 		var gameObject = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, this.transform);
 
 		for (int i = 0; i < star.NumberOfPlanets; i++)
