@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class SolarSystem : MonoBehaviour {
 	public static SolarSystem Instance;
+	public Button galaxyViewButton;
 
 	void OnEnable()
 	{
 		Instance = this;
-		galaxyViewButton.intractable = false;
+		galaxyViewButton.interactable = false;
 	}
 
 	// Use this for initialization
@@ -52,6 +53,18 @@ public class SolarSystem : MonoBehaviour {
 			}
 		}
 
-		galaxyViewButton.intractable = true;
+		galaxyViewButton.interactable = true;
+	}
+
+	public void DestroySolarSystem()
+	{
+		while (transform.childCount > 0)
+		{
+			var gameObject = transform.GetChild(0);
+			gameObject.SetParent(null);
+			Destroy(gameObject.gameObject);
+		}
+
+		galaxyViewButton.interactable = false;
 	}
 }
