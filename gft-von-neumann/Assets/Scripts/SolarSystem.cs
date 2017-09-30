@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class SolarSystem : MonoBehaviour {
 	public static SolarSystem Instance;
 	public Button galaxyViewButton;
+	public Vector3 StarPosition { get; set; }
+	public GameObject OrbitSpritePrefab;
 
 	void OnEnable()
 	{
@@ -14,7 +16,8 @@ public class SolarSystem : MonoBehaviour {
 	}
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		
 	}
 	
@@ -23,9 +26,10 @@ public class SolarSystem : MonoBehaviour {
 		var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		var hit = new RaycastHit();
 
-		if (Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
+		if (Galaxy.Instance.GalaxyView && Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
 		{
 			var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
+			StarPosition = hit.transform.position;
 			Debug.Log("Clicked on star: " + star.StarName);
 
 			Galaxy.Instance.DestroyGalaxy();
@@ -35,7 +39,9 @@ public class SolarSystem : MonoBehaviour {
 
 	public void CreateSolarSystem(Star star)
 	{
+		CameraController.Instance.ResetCamera();
 		Random.InitState(Galaxy.Instance.seedNumber);
+		Galaxy.Instance.GalaxyView = false;
 		var gameObject = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, this.transform);
 
 		for (int i = 0; i < star.NumberOfPlanets; i++)
@@ -46,6 +52,7 @@ public class SolarSystem : MonoBehaviour {
 				var position = PositionMath.PlanetPosition(i);
 
 				SpaceObjects.CreateSphereObject(planet.PlanetName, position, this.transform);
+				var orbit = SpaceObjects.CreateOrbitPath(OrbitSpritePrefab, planet.PlanetName + "Orbit", i + 1, this.transform);
 			}
 		}
 
@@ -61,6 +68,7 @@ public class SolarSystem : MonoBehaviour {
 			Destroy(gameObject.gameObject);
 		}
 
+		CameraController.Instance.MoveTo(StarPosition);
 		galaxyViewButton.interactable = false;
 	}
 }

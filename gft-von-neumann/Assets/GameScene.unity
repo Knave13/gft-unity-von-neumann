@@ -135,6 +135,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43d4b8dc65a200543bfea2792b10a8a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PanSpeed: 100
+  ZoomedInAngle: 45
+  ZoomedOutAngle: 90
+  MinZoom: 20
+  MaxZoom: 200
+  InverseZoom: 0
 --- !u!4 &264359200
 Transform:
   m_ObjectHideFlags: 0
@@ -271,6 +277,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   galaxyViewButton: {fileID: 2010202099}
+  OrbitSpritePrefab: {fileID: 1853502055934632, guid: 56630d45c47ad8748bc7ae343f60bd90,
+    type: 2}
 --- !u!4 &621641035
 Transform:
   m_ObjectHideFlags: 0
@@ -532,8 +540,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1389307014}
-  m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 50, z: 0}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 150, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1164885567}
@@ -622,7 +630,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberOfStars: 300
   maximumRadius: 100
-  maximumHeight: 100
+  maximumHeight: 15
   maximumPlanets: 12
   seedNumber: 100
   mininumProximity: 4
