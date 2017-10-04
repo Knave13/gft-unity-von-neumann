@@ -27,7 +27,8 @@ public class Galaxy : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	void Update () 
+	{
 		
 	}
 
@@ -60,8 +61,8 @@ public class Galaxy : MonoBehaviour {
 			if (positionCollider.Length == 0)
 			{
 				var name = "Star - " + i.ToString();
-				var starData = new Star(name, Random.Range(0, maximumPlanets));
-				var starGameObject = SpaceObjects.CreateSphereObject(starData.StarName, position, this.transform);
+				var starData = new Star(name, Random.Range(0, maximumPlanets), Random.Range(1f, 3f));
+				var starGameObject = SpaceObjects.CreateSphereObject(starData.StarName, position, starData.StarSize, this.transform);
 
 				starToObjectMap.Add(starData, starGameObject);
 				CreatePlanetData(starData);
@@ -99,29 +100,35 @@ public class Galaxy : MonoBehaviour {
 			string name = star.StarName + " - " + i.ToString();
 			int random = Random.Range(1, 100);
 			string planetType = string.Empty;
+			float size = 0;
 
 			if (random < 5)
 			{
 				planetType = PlanetTypes[0];
+				size = 0.5f;
 			}
 			else if (random < 45)
 			{
 				planetType = PlanetTypes[1];
+				size = 1.0f;
 			}
 			else if (random < 75)
 			{
 				planetType = PlanetTypes[2];
+				size = 2.0f;
 			}
 			else if (random < 90)
 			{
 				planetType = PlanetTypes[3];
+				size = 0.25f;
 			}
 			else
 			{
 				planetType = PlanetTypes[4];
+				size = 0.5f;
 			}
 
-			var planet = new PlanetaryObject(name, planetType);
+			var planet = new PlanetaryObject(name, planetType, size);
 
 			star.PlanetList.Add(planet);
 		}

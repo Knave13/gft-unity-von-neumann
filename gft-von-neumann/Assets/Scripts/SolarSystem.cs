@@ -43,7 +43,7 @@ public class SolarSystem : MonoBehaviour {
 		CameraController.Instance.ResetCamera();
 		Random.InitState(Galaxy.Instance.seedNumber);
 		Galaxy.Instance.GalaxyView = false;
-		var mainStar = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, this.transform);
+		var mainStar = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, star.StarSize, this.transform);
 
 		for (int i = 0; i < star.NumberOfPlanets; i++)
 		{
@@ -52,11 +52,23 @@ public class SolarSystem : MonoBehaviour {
 			{
 				var position = PositionMath.PlanetPosition(i);
 
-				SpaceObjects.CreateSphereObject(planet.PlanetName, position, this.transform);
+				SpaceObjects.CreateSphereObject(planet.PlanetName, position, planet.PlanetSize, this.transform);
 				//var orbit = SpaceObjects.CreateOrbitPath(OrbitSpritePrefab, planet.PlanetName + "Orbit", i + 1, this.transform);
 				var orbit = SpaceObjects.CreateOrbitRing(OrbitCirclePrefab, "Orbit " + i, i + 1, this.transform);
 				var circle = orbit.GetComponent<Circle>();
 				circle.SetupCircle();
+				if (i < 3) 
+				{
+					circle.SetColor(Color.yellow, Color.yellow);
+				}
+				else if (i == 3)
+				{
+					circle.SetColor(Color.green, Color.green);
+				}
+				else
+				{
+					circle.SetColor(Color.blue, Color.blue);
+				}
 				Debug.Log("Circle:" + circle.vertexCount + " radius: " + circle.radius);
 			}
 		}
