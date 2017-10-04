@@ -24,6 +24,17 @@ public class SpaceObjects {
         return orbit;
     }
 
+    public static GameObject CreateOrbitRing(GameObject circle, string name, int orbitNumber, Transform parent = null)
+    {
+        GameObject orbit = GameObject.Instantiate(circle);
+        orbit.name = name;
+        orbit.GetComponent<Circle>().radius = orbitNumber * 5f;
+        //orbit.radius = orbitNumber * 5f;
+        orbit.transform.SetParent(parent);
+
+        return orbit;
+    }
+
     /*
     Copyright Shadowplay Coding 2017 - see www.shadowplaycoding.com for licensing details
     Removing this comment forfits any rights given to the user under licensing.

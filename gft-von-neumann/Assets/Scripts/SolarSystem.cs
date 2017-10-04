@@ -8,6 +8,7 @@ public class SolarSystem : MonoBehaviour {
 	public Button galaxyViewButton;
 	public Vector3 StarPosition { get; set; }
 	public GameObject OrbitSpritePrefab;
+	public GameObject OrbitCirclePrefab;
 
 	void OnEnable()
 	{
@@ -42,7 +43,7 @@ public class SolarSystem : MonoBehaviour {
 		CameraController.Instance.ResetCamera();
 		Random.InitState(Galaxy.Instance.seedNumber);
 		Galaxy.Instance.GalaxyView = false;
-		var gameObject = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, this.transform);
+		var mainStar = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, this.transform);
 
 		for (int i = 0; i < star.NumberOfPlanets; i++)
 		{
@@ -52,7 +53,11 @@ public class SolarSystem : MonoBehaviour {
 				var position = PositionMath.PlanetPosition(i);
 
 				SpaceObjects.CreateSphereObject(planet.PlanetName, position, this.transform);
-				var orbit = SpaceObjects.CreateOrbitPath(OrbitSpritePrefab, planet.PlanetName + "Orbit", i + 1, this.transform);
+				//var orbit = SpaceObjects.CreateOrbitPath(OrbitSpritePrefab, planet.PlanetName + "Orbit", i + 1, this.transform);
+				var orbit = SpaceObjects.CreateOrbitRing(OrbitCirclePrefab, "Orbit " + i, i + 1, this.transform);
+				var circle = orbit.GetComponent<Circle>();
+				circle.SetupCircle();
+				Debug.Log("Circle:" + circle.vertexCount + " radius: " + circle.radius);
 			}
 		}
 

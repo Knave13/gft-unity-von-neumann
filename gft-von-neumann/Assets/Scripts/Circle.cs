@@ -15,11 +15,12 @@ public class Circle : MonoBehaviour
 	private void Awake()
 	{
 		lineRenderer = GetComponent<LineRenderer>();
-		SetupCircle();
+		//SetupCircle();
 	}
 
-	private void SetupCircle()
+	public void SetupCircle()
 	{
+		Debug.Log("Radius: " + radius);
 		lineRenderer.widthMultiplier = lineWidth;
 
 		if (circleFillscreen)
@@ -34,7 +35,7 @@ public class Circle : MonoBehaviour
 		lineRenderer.positionCount = vertexCount;
 		for (int i = 0; i < lineRenderer.positionCount; i++)
 		{
-			Vector3 pos = new Vector3(radius * Mathf.Cos(theta), radius * Mathf.Sin(theta), 0f);
+			Vector3 pos = new Vector3(radius * Mathf.Cos(theta), 0, radius * Mathf.Sin(theta));
 			lineRenderer.SetPosition(i, pos);
 			theta += deltaTheta;
 		}
