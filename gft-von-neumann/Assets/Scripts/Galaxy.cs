@@ -20,7 +20,7 @@ public class Galaxy : MonoBehaviour {
 	public GameObject CurrentCourse;
 	public string[] PlanetTypes = { "Empty", "Rocky", "Gas Giant", "Asteroids", "Planetoid" };
 
-	private float _defaultStarSize = 1.0f;
+	private float _defaultStarSize = 1.5f;
 	void OnEnable()
 	{
 		Instance = this;

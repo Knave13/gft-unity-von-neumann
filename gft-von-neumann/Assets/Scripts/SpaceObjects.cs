@@ -3,7 +3,7 @@ using System.Collections;
 
 public class SpaceObjects {
     public static float[] OrbitDistances = { 0f, 10f, 13f, 16.5f, 20.5f, 25f, 30f, 36f, 43f, 51f, 60f, 70f, 81f, 93f, 106f, 120f, 140f };
-    public static Color[] StarColors = { Color.white, Color.blue, Color.green, Color.yellow, new Color(1.0f, 0.65f, 0f, 1f), Color.red };
+    public static Color[] StarColors = { Color.white, Color.blue, Color.green, Color.yellow, new Color(.9f, .2f, 0f), Color.red };
 
     // This method creates a sphere object whether that be a planet or star
 	public static GameObject CreateSphereObject(string name, Vector3 position, float size, Transform parent = null)
