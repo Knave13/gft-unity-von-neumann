@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SolarSystem : MonoBehaviour {
 	public static SolarSystem Instance;
 	public Button galaxyViewButton;
+	public Button pathViewButton;
 	public Vector3 StarPosition { get; set; }
 	public GameObject OrbitSpritePrefab;
 	public GameObject OrbitCirclePrefab;
@@ -14,6 +15,7 @@ public class SolarSystem : MonoBehaviour {
 	{
 		Instance = this;
 		galaxyViewButton.interactable = false;
+		pathViewButton.interactable = false;
 	}
 
 	// Use this for initialization
@@ -27,7 +29,15 @@ public class SolarSystem : MonoBehaviour {
 		var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		var hit = new RaycastHit();
 
-		if (Galaxy.Instance.GalaxyView && Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
+		if (Galaxy.Instance.PathView && Galaxy.Instance.GalaxyView && Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
+		{
+			var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
+			StarPosition = hit.transform.position;
+			SpaceObjects.AddStarToCoursePath(Galaxy.Instance.CoursePath, StarPosition);
+			
+			Debug.Log("Clicked on star: " + star.StarName);
+		}
+		else if (Galaxy.Instance.GalaxyView && Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
 		{
 			var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
 			StarPosition = hit.transform.position;
@@ -43,6 +53,7 @@ public class SolarSystem : MonoBehaviour {
 		CameraController.Instance.ResetCamera();
 		Random.InitState(Galaxy.Instance.seedNumber);
 		Galaxy.Instance.GalaxyView = false;
+		Galaxy.Instance.PathView = false;
 		var mainStar = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, star.StarSize, this.transform);
 
 		for (int i = 0; i < star.NumberOfPlanets; i++)
@@ -74,6 +85,7 @@ public class SolarSystem : MonoBehaviour {
 		}
 
 		galaxyViewButton.interactable = true;
+		pathViewButton.interactable = false;
 	}
 
 	public void DestroySolarSystem()
@@ -87,5 +99,6 @@ public class SolarSystem : MonoBehaviour {
 
 		CameraController.Instance.MoveTo(StarPosition);
 		galaxyViewButton.interactable = false;
+		pathViewButton.interactable = true;
 	}
 }

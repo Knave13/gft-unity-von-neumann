@@ -9,9 +9,8 @@ public class Circle : MonoBehaviour
 	public float lineWidth = 0.2f;
 	public float radius;
 	public bool circleFillscreen;
-	public Color CircleColor1 = Color.white;
-	public Color CircleColor2 = Color.white;
 
+	private Color _defaultColor = Color.white;
 	private LineRenderer lineRenderer;
 	
 	private void Awake()
@@ -35,7 +34,7 @@ public class Circle : MonoBehaviour
 
 		lineRenderer.positionCount = vertexCount;
 		lineRenderer.loop = true;
-		SetColor(CircleColor1, CircleColor2);
+		SetColor(_defaultColor, _defaultColor);
 		for (int i = 0; i < lineRenderer.positionCount; i++)
 		{
 			Vector3 pos = new Vector3(radius * Mathf.Cos(theta), 0, radius * Mathf.Sin(theta));
@@ -46,11 +45,9 @@ public class Circle : MonoBehaviour
 
 	public void SetColor(Color c1, Color c2)
 	{
-		CircleColor1 = c1;
-		CircleColor2 = c2;
-
 		lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-		lineRenderer.SetColors(CircleColor1, CircleColor2);
+		lineRenderer.startColor = c1;
+		lineRenderer.endColor = c2;
 	}
 
 #if UNITY_EDITOR

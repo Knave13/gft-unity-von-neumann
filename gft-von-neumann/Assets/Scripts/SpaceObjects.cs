@@ -36,6 +36,19 @@ public class SpaceObjects {
         return orbit;
     }
 
+    public static GameObject CreateCoursePath(GameObject course, Transform parent = null)
+    {
+        GameObject coursePath = GameObject.Instantiate(course);
+        coursePath.transform.SetParent(parent);
+
+        return coursePath;
+    }
+
+    public static void AddStarToCoursePath(GameObject course, Vector3 starPosition)
+    {
+        course.GetComponent<CoursePath>().AddPoint(starPosition);
+    }
+
     /*
     Copyright Shadowplay Coding 2017 - see www.shadowplaycoding.com for licensing details
     Removing this comment forfits any rights given to the user under licensing.

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Galaxy : MonoBehaviour {
 	public int numberOfStars = 300;
@@ -13,16 +14,23 @@ public class Galaxy : MonoBehaviour {
 	public Dictionary<Star, GameObject> starToObjectMap { get; protected set; }
 	public static Galaxy Instance;
 	public bool GalaxyView { get; set; }
+	public bool PathView { get; set; }
+	public Button pathViewButton;
+	public GameObject CoursePathPrefab;
+	public GameObject CoursePath;
 	public string[] PlanetTypes = { "Empty", "Rocky", "Gas Giant", "Asteroids", "Planetoid" };
 
 	void OnEnable()
 	{
 		Instance = this;
+		pathViewButton.interactable = true;
 	}
 
 	// Use this for initialization
 	void Start () 
 	{
+		PathView = false;
+		CoursePath = SpaceObjects.CreateCoursePath(CoursePathPrefab, this.transform);
 		CreateGalaxy();
 	}
 	
@@ -40,6 +48,7 @@ public class Galaxy : MonoBehaviour {
 			gameObject.transform.SetParent(null);
 			Destroy(gameObject.gameObject);
 		}
+		pathViewButton.interactable = false;
 	}
 
 	public void CreateGalaxy()
@@ -79,6 +88,22 @@ public class Galaxy : MonoBehaviour {
 				Debug.Log("Failed to generate star due to proximity validation check");
 				break;
 			}
+		}
+		pathViewButton.interactable = true;
+	}
+
+	public void TogglePathView()
+	{
+		var buttonText = pathViewButton.GetComponentInChildren<Text>();
+		if (PathView)
+		{
+			buttonText.text = "View Path";
+			PathView = false;
+		}
+		else
+		{
+			buttonText.text = "View Path (On)";
+			PathView = true;
 		}
 	}
 
