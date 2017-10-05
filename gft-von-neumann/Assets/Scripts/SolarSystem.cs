@@ -33,15 +33,12 @@ public class SolarSystem : MonoBehaviour {
 		{
 			var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
 			StarPosition = hit.transform.position;
-			SpaceObjects.AddStarToCoursePath(Galaxy.Instance.CoursePath, StarPosition);
-			
-			Debug.Log("Clicked on star: " + star.StarName);
+			SpaceObjects.AddStarToCoursePath(Galaxy.Instance.CurrentCourse, hit.transform.gameObject.transform.position);
 		}
 		else if (Galaxy.Instance.GalaxyView && Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
 		{
 			var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
 			StarPosition = hit.transform.position;
-			Debug.Log("Clicked on star: " + star.StarName);
 
 			Galaxy.Instance.DestroyGalaxy();
 			CreateSolarSystem(star);
@@ -55,8 +52,9 @@ public class SolarSystem : MonoBehaviour {
 		Galaxy.Instance.GalaxyView = false;
 		Galaxy.Instance.PathView = false;
 		var mainStar = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, star.StarSize, this.transform);
-
-		for (int i = 0; i < star.NumberOfPlanets; i++)
+		
+		mainStar.GetComponent<Renderer>().material.color = SpaceObjects.StarColors[star.ColorIndex];
+for (int i = 0; i < star.NumberOfPlanets; i++)
 		{
 			PlanetaryObject planet = star.PlanetList[i];
 			if (planet.PlanetType != "Empty")

@@ -33,7 +33,7 @@ public class PositionMath {
     // This method creates a positon for a planet based on its number in the planetList (see Star Class)
     public static Vector3 PlanetPosition(int planetListNumber)
     {
-        float distance = (planetListNumber + 1) * 5;
+        float distance = SpaceObjects.OrbitDistances[planetListNumber + 1];
         float angle = RandomAngle();
 
         Vector3 cartPosition = PolarToCart(distance, angle);

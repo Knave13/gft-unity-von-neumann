@@ -7,7 +7,7 @@ public class CoursePath : MonoBehaviour {
 	public int vertexCount = 0;
 	public float lineWidth = 0.2f;
 
-	private Color _defaultColor = Color.white;
+	private Color _defaultColor = Color.cyan;
 	private LineRenderer lineRenderer;
 	
 	private void Awake()
@@ -36,12 +36,17 @@ public class CoursePath : MonoBehaviour {
 		}
 	}
 
+	public void DisplayDebugData()
+	{
+		Debug.Log("Vertex Count: " + vertexCount);
+	}
+
 	public void AddPoint(Vector3 pt)
 	{
 		vertexCount++;
 		lineRenderer.positionCount = vertexCount;
 		lineRenderer.loop = false;
-		lineRenderer.SetPosition(lineRenderer.positionCount + 1, pt);
+		lineRenderer.SetPosition(lineRenderer.positionCount - 1, pt);
 	}
 
 	public void SetColor(Color c1, Color c2)

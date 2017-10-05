@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraController.cs" />
     <Compile Include="Assets\Scripts\Circle.cs" />
+    <Compile Include="Assets\Scripts\CoursePath.cs" />
     <Compile Include="Assets\Scripts\Galaxy.cs" />
     <Compile Include="Assets\Scripts\PlanetaryObject.cs" />
     <Compile Include="Assets\Scripts\PositionMath.cs" />

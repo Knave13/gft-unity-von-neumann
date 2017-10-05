@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f82a9cb55576545449b68ea9d841c986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vertexCount: 40
+  vertexCount: 0
   lineWidth: 0.2
 --- !u!120 &120204086722203164
 LineRenderer:

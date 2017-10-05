@@ -17,9 +17,10 @@ public class Galaxy : MonoBehaviour {
 	public bool PathView { get; set; }
 	public Button pathViewButton;
 	public GameObject CoursePathPrefab;
-	public GameObject CoursePath;
+	public GameObject CurrentCourse;
 	public string[] PlanetTypes = { "Empty", "Rocky", "Gas Giant", "Asteroids", "Planetoid" };
 
+	private float _defaultStarSize = 1.0f;
 	void OnEnable()
 	{
 		Instance = this;
@@ -30,7 +31,6 @@ public class Galaxy : MonoBehaviour {
 	void Start () 
 	{
 		PathView = false;
-		CoursePath = SpaceObjects.CreateCoursePath(CoursePathPrefab, this.transform);
 		CreateGalaxy();
 	}
 	
@@ -54,6 +54,12 @@ public class Galaxy : MonoBehaviour {
 	public void CreateGalaxy()
 	{
 		Random.InitState(seedNumber);
+		CurrentCourse = SpaceObjects.CreateCoursePath(CoursePathPrefab, this.transform);
+		CurrentCourse.GetComponent<CoursePath>().DisplayDebugData();
+		if (PathView)
+		{
+			TogglePathView();
+		}
 		GalaxyView = true;
 		starToObjectMap = new Dictionary<Star, GameObject>();
 		int failCount = 0;
@@ -70,8 +76,10 @@ public class Galaxy : MonoBehaviour {
 			if (positionCollider.Length == 0)
 			{
 				var name = "Star - " + i.ToString();
-				var starData = new Star(name, Random.Range(0, maximumPlanets), Random.Range(1f, 3f));
-				var starGameObject = SpaceObjects.CreateSphereObject(starData.StarName, position, starData.StarSize, this.transform);
+				var starData = new Star(name, Random.Range(0, maximumPlanets), Random.Range(3f, 6f), i % SpaceObjects.StarColors.Length);
+				var starGameObject = SpaceObjects.CreateSphereObject(starData.StarName, position, _defaultStarSize, this.transform);
+
+				starGameObject.GetComponent<Renderer>().material.color = SpaceObjects.StarColors[starData.ColorIndex];
 
 				starToObjectMap.Add(starData, starGameObject);
 				CreatePlanetData(starData);
