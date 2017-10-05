@@ -36,11 +36,6 @@ public class CoursePath : MonoBehaviour {
 		}
 	}
 
-	public void DisplayDebugData()
-	{
-		Debug.Log("Vertex Count: " + vertexCount);
-	}
-
 	public void AddPoint(Vector3 pt)
 	{
 		vertexCount++;

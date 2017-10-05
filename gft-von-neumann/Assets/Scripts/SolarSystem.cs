@@ -8,6 +8,7 @@ public class SolarSystem : MonoBehaviour {
 	public Button galaxyViewButton;
 	public Button pathViewButton;
 	public Vector3 StarPosition { get; set; }
+	public Text SystemDetailsText;
 	public GameObject OrbitSpritePrefab;
 	public GameObject OrbitCirclePrefab;
 
@@ -54,7 +55,7 @@ public class SolarSystem : MonoBehaviour {
 		var mainStar = SpaceObjects.CreateSphereObject(star.StarName, Vector3.zero, star.StarSize, this.transform);
 		
 		mainStar.GetComponent<Renderer>().material.color = SpaceObjects.StarColors[star.ColorIndex];
-for (int i = 0; i < star.NumberOfPlanets; i++)
+		for (int i = 0; i < star.NumberOfPlanets; i++)
 		{
 			PlanetaryObject planet = star.PlanetList[i];
 			if (planet.PlanetType != "Empty")
@@ -78,12 +79,12 @@ for (int i = 0; i < star.NumberOfPlanets; i++)
 				{
 					circle.SetColor(Color.blue, Color.blue);
 				}
-				Debug.Log("Circle:" + circle.vertexCount + " radius: " + circle.radius);
 			}
 		}
 
 		galaxyViewButton.interactable = true;
 		pathViewButton.interactable = false;
+		SystemDetailsText.text = star.Details(2);
 	}
 
 	public void DestroySolarSystem()
@@ -98,5 +99,6 @@ for (int i = 0; i < star.NumberOfPlanets; i++)
 		CameraController.Instance.MoveTo(StarPosition);
 		galaxyViewButton.interactable = false;
 		pathViewButton.interactable = true;
+		SystemDetailsText.text = string.Empty;
 	}
 }

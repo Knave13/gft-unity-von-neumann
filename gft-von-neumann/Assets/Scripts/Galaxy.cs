@@ -55,7 +55,6 @@ public class Galaxy : MonoBehaviour {
 	{
 		Random.InitState(seedNumber);
 		CurrentCourse = SpaceObjects.CreateCoursePath(CoursePathPrefab, this.transform);
-		CurrentCourse.GetComponent<CoursePath>().DisplayDebugData();
 		if (PathView)
 		{
 			TogglePathView();
@@ -76,7 +75,7 @@ public class Galaxy : MonoBehaviour {
 			if (positionCollider.Length == 0)
 			{
 				var name = "Star - " + i.ToString();
-				var starData = new Star(name, Random.Range(0, maximumPlanets), Random.Range(3f, 6f), i % SpaceObjects.StarColors.Length);
+				var starData = new Star(name, Random.Range(0, maximumPlanets), Random.Range(3f, 6f), i % SpaceObjects.StarColors.Length, i % 10);
 				var starGameObject = SpaceObjects.CreateSphereObject(starData.StarName, position, _defaultStarSize, this.transform);
 
 				starGameObject.GetComponent<Renderer>().material.color = SpaceObjects.StarColors[starData.ColorIndex];
