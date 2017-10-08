@@ -30,20 +30,34 @@ public class SolarSystem : MonoBehaviour {
 		var mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 		var hit = new RaycastHit();
 
-		if (Galaxy.Instance.PathView && Galaxy.Instance.GalaxyView && Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
+		if (Galaxy.Instance.PathView && Galaxy.Instance.GalaxyView && 
+			Physics.Raycast(mouseRay, out hit))
 		{
-			var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
-			StarPosition = hit.transform.position;
-			SpaceObjects.AddStarToCoursePath(Galaxy.Instance.CurrentCourse, hit.transform.gameObject.transform.position);
+			Galaxy.Instance.MoveSelectionIcon(hit);
+			if (Input.GetMouseButtonDown(0))
+			{
+				var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
+				StarPosition = hit.transform.position;
+				SpaceObjects.AddStarToCoursePath(Galaxy.Instance.CurrentCourse, hit.transform.gameObject.transform.position);
+			}
 		}
-		else if (Galaxy.Instance.GalaxyView && Physics.Raycast(mouseRay, out hit) && Input.GetMouseButtonDown(0))
+		else if (Galaxy.Instance.GalaxyView && 
+				 Physics.Raycast(mouseRay, out hit))
 		{
-			var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
-			StarPosition = hit.transform.position;
+			Galaxy.Instance.MoveSelectionIcon(hit);
+			if (Input.GetMouseButtonDown(0))
+			{
+				var star = Galaxy.Instance.GetStarByGameObject(hit.transform.gameObject);
+				StarPosition = hit.transform.position;
 
-			Galaxy.Instance.DestroyGalaxy();
-			CreateSolarSystem(star);
-		}	
+				Galaxy.Instance.DestroyGalaxy();
+				CreateSolarSystem(star);
+			}
+		}
+		else
+		{
+			Galaxy.Instance.SelectionIcon.SetActive(false);
+		}
 	}
 
 	public void CreateSolarSystem(Star star)
@@ -96,7 +110,7 @@ public class SolarSystem : MonoBehaviour {
 			Destroy(gameObject.gameObject);
 		}
 
-		CameraController.Instance.MoveTo(StarPosition);
+		//CameraController.Instance.MoveTo(StarPosition);
 		galaxyViewButton.interactable = false;
 		pathViewButton.interactable = true;
 		SystemDetailsText.text = string.Empty;

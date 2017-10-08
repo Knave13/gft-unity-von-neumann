@@ -18,6 +18,7 @@ public class Galaxy : MonoBehaviour {
 	public Button pathViewButton;
 	public GameObject CoursePathPrefab;
 	public GameObject CurrentCourse;
+	public GameObject SelectionIcon;
 	public string[] PlanetTypes = { "Empty", "Rocky", "Gas Giant", "Asteroids", "Planetoid" };
 
 	private float _defaultStarSize = 1.5f;
@@ -31,6 +32,7 @@ public class Galaxy : MonoBehaviour {
 	void Start () 
 	{
 		PathView = false;
+		CreateSelectionIcon();
 		CreateGalaxy();
 	}
 	
@@ -164,6 +166,20 @@ public class Galaxy : MonoBehaviour {
 
 			star.PlanetList.Add(planet);
 		}
+	}
+
+	void CreateSelectionIcon()
+	{
+		SelectionIcon = GameObject.Instantiate(SelectionIcon);
+		SelectionIcon.transform.localScale = SelectionIcon.transform.localScale * 3.0f;
+		SelectionIcon.SetActive(false);
+	}
+
+	public void MoveSelectionIcon(RaycastHit hit)
+	{
+		SelectionIcon.SetActive(true);
+		SelectionIcon.transform.position = hit.transform.position;
+		SelectionIcon.transform.rotation = CameraController.CurrentAngle;
 	}
 
 	public Star GetStarByGameObject(GameObject gameObject)

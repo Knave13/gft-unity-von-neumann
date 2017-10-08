@@ -5,17 +5,18 @@ using UnityEngine;
 public class CameraController : MonoBehaviour 
 {
 	public static CameraController Instance;
+	public static Quaternion CurrentAngle;
 	public float PanSpeed = 5;
-	public float ZoomedInAngle = 45;
-	public float ZoomedOutAngle = 90;
-	public float MinZoom = 20;
+	public float ZoomedInAngle = 0;
+	public float ZoomedOutAngle = 0;
+	public float MinZoom = 0;
 	public float MaxZoom = 200;
-	public bool InverseZoom = false;
+	public bool InverseZoom = true;
 
 	Transform _rotationObject;
 	Transform _zoomObject;
 	float _zoomLevel = 0;
-	float _rotationSpeed = 30f;
+	float _rotationSpeed = 50f;
 
 	void Awake()
 	{
@@ -49,7 +50,8 @@ public class CameraController : MonoBehaviour
 		this.transform.position = new Vector3(0, 0, 0);
 		_zoomLevel = 0;
 		_rotationObject.transform.rotation = Quaternion.Euler(ZoomedInAngle, 0, 0);
-		_zoomObject.transform.localPosition = new Vector3(0, 0, MinZoom);
+		CurrentAngle = _rotationObject.transform.rotation;
+		_zoomObject.transform.localPosition = new Vector3(0, MinZoom, 0);
 	}
 
 	void ChangeZoom()
@@ -65,37 +67,53 @@ public class CameraController : MonoBehaviour
 				_zoomLevel = Mathf.Clamp01(_zoomLevel - Input.GetAxis("Mouse ScrollWheel"));
 			}
 			float zoom = Mathf.Lerp(-MinZoom, -MaxZoom, _zoomLevel);
-			_zoomObject.transform.localPosition = new Vector3(0, 0, zoom);
+			_zoomObject.transform.localPosition = new Vector3(_rotationObject.transform.rotation.x, zoom, _rotationObject.transform.rotation.z);
 
-			float zoomAngle = Mathf.Lerp(ZoomedInAngle, ZoomedOutAngle, _zoomLevel);
-			_rotationObject.transform.localRotation = Quaternion.Euler(zoomAngle, 0, 0);
+			//_rotationObject.transform.localPosition = new Vector3(_rotationObject.transform.rotation.x, zoom, _rotationObject.transform.rotation.z);
+			
+			// float zoomAngle = Mathf.Lerp(ZoomedInAngle, ZoomedOutAngle, _zoomLevel);
+			// _rotationObject.transform.localRotation = Quaternion.Euler(zoomAngle, 0, 0);
 		}
 	}
 
 	void ChangePosition()
 	{
-		if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+		if (Galaxy.Instance.GalaxyView &&
+			(Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0))
 		{
-			float movementFactor = Mathf.Lerp(MinZoom, MaxZoom, _zoomLevel);
-			float distance = PanSpeed * Time.deltaTime;
-			var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
-			float dampeningFactor = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), Mathf.Abs(Input.GetAxis("Vertical")));
+			// float movementFactor = Mathf.Lerp(MinZoom, MaxZoom, _zoomLevel);
+			// float distance = PanSpeed * Time.deltaTime;
+			// var direction = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")).normalized;
+			// float dampeningFactor = Mathf.Max(Mathf.Abs(Input.GetAxis("Horizontal")), Mathf.Abs(Input.GetAxis("Vertical")));
 
-			transform.Translate(distance * dampeningFactor * movementFactor * direction);
+			// transform.Translate(distance * dampeningFactor * movementFactor * direction);
 
-			ClampCameraPan();
+			// ClampCameraPan();
+			float angleZ = Input.GetAxis("Horizontal") * _rotationSpeed * Time.deltaTime;
+			float angleX = Input.GetAxis("Vertical") * _rotationSpeed * Time.deltaTime;
+
+			//_rotationObject.transform.localRotation = Quaternion.Euler(angleX, 0, angleZ);
+			//transform.Rotate(angleX, 0, angleZ);
+			_rotationObject.transform.Rotate(angleX, 0, angleZ);
+			CurrentAngle = _rotationObject.transform.rotation;
+			
 		}
 	}
 
 	void ChangeRotation()
 	{
-		if (Input.GetAxis("RightJoystickX") != 0 || Input.GetAxis("RightJoystickY") != 0)
+		if (Galaxy.Instance.GalaxyView &&
+			(Input.GetAxis("RightJoystickX") != 0 || Input.GetAxis("RightJoystickY") != 0))
 		{
 			float angleZ = Input.GetAxis("RightJoystickY") * _rotationSpeed * Time.deltaTime;
 			float angleX = Input.GetAxis("RightJoystickX") * _rotationSpeed * Time.deltaTime;
 
 			//_rotationObject.transform.localRotation = Quaternion.Euler(angleX, 0, angleZ);
-			transform.Rotate(angleX, 0, angleZ);
+			// transform.Rotate(angleX, 0, angleZ);
+			// CurrentAngle = transform.rotation;
+
+			_rotationObject.transform.Rotate(angleX, 0, angleZ);
+			CurrentAngle = _rotationObject.transform.rotation;
 		}
 	}
 

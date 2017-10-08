@@ -136,11 +136,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanSpeed: 100
-  ZoomedInAngle: 45
-  ZoomedOutAngle: 90
-  MinZoom: 20
-  MaxZoom: 200
-  InverseZoom: 0
+  ZoomedInAngle: 0
+  ZoomedOutAngle: 0
+  MinZoom: 0
+  MaxZoom: 150
+  InverseZoom: 1
 --- !u!4 &264359200
 Transform:
   m_ObjectHideFlags: 0
@@ -743,7 +743,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1389307014}
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 150, z: 0}
+  m_LocalPosition: {x: 0, y: 180, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1164885567}
@@ -914,6 +914,8 @@ MonoBehaviour:
   CoursePathPrefab: {fileID: 1951924742555494, guid: d721ad9d439074c0e9814c73391d7a1a,
     type: 2}
   CurrentCourse: {fileID: 0}
+  SelectionIcon: {fileID: 1599766255192584, guid: ee085c7e9a195584c82b9c85d5658ed2,
+    type: 2}
   PlanetTypes:
   - Empty
   - Rocky
