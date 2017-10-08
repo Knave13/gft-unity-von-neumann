@@ -19,9 +19,11 @@ public class Galaxy : MonoBehaviour {
 	public GameObject CoursePathPrefab;
 	public GameObject CurrentCourse;
 	public GameObject SelectionIcon;
+	public TextAsset StarNames;
 	public string[] PlanetTypes = { "Empty", "Rocky", "Gas Giant", "Asteroids", "Planetoid" };
 
 	private float _defaultStarSize = 1.5f;
+	private List<string> availableStarNames;
 	void OnEnable()
 	{
 		Instance = this;
@@ -57,12 +59,14 @@ public class Galaxy : MonoBehaviour {
 	{
 		Random.InitState(seedNumber);
 		CurrentCourse = SpaceObjects.CreateCoursePath(CoursePathPrefab, this.transform);
+		CurrentCourse.SetActive(true);
 		if (PathView)
 		{
 			TogglePathView();
 		}
 		GalaxyView = true;
 		starToObjectMap = new Dictionary<Star, GameObject>();
+		availableStarNames = TextAssetManager.TextToList(StarNames);
 		int failCount = 0;
 		for (int i = 0; i < numberOfStars; i++) 
 		{
@@ -76,7 +80,7 @@ public class Galaxy : MonoBehaviour {
 
 			if (positionCollider.Length == 0)
 			{
-				var name = "Star - " + i.ToString();
+				var name = availableStarNames[i];
 				var starData = new Star(name, Random.Range(0, maximumPlanets), Random.Range(3f, 6f), i % SpaceObjects.StarColors.Length, i % 10);
 				var starGameObject = SpaceObjects.CreateSphereObject(starData.StarName, position, _defaultStarSize, this.transform);
 
@@ -99,6 +103,7 @@ public class Galaxy : MonoBehaviour {
 			}
 		}
 		pathViewButton.interactable = true;
+		CurrentCourse.SetActive(false);
 	}
 
 	public void TogglePathView()

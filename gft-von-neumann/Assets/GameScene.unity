@@ -916,6 +916,7 @@ MonoBehaviour:
   CurrentCourse: {fileID: 0}
   SelectionIcon: {fileID: 1599766255192584, guid: ee085c7e9a195584c82b9c85d5658ed2,
     type: 2}
+  StarNames: {fileID: 4900000, guid: 529b4b3d2dbafec46b574e6ac0818ae6, type: 3}
   PlanetTypes:
   - Empty
   - Rocky

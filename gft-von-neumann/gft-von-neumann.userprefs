@@ -1,0 +1,13 @@
+﻿<Properties StartupItem="gft-von-neumann.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Galaxy.cs">
+    <Files>
+      <File FileName="Assets\Scripts\CoursePath.cs" Line="42" Column="1" />
+      <File FileName="Assets\Scripts\Galaxy.cs" Line="62" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

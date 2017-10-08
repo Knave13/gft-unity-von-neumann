@@ -15,6 +15,8 @@ public class SpaceObjects {
         sphere.transform.parent = parent;
         sphere.transform.localScale = new Vector3(size, size, size);
 
+        CreateNamePlate(sphere);
+
         return sphere;
     }
 
@@ -50,6 +52,22 @@ public class SpaceObjects {
     public static void AddStarToCoursePath(GameObject course, Vector3 starPosition)
     {
         course.GetComponent<CoursePath>().AddPoint(starPosition);
+        if (course.GetComponent<CoursePath>().vertexCount == 1)
+        {
+            course.SetActive(true);
+        }
+    }
+
+    public static void CreateNamePlate(GameObject gameObject)
+    {
+        TextMesh namePlate = new GameObject(gameObject.name + " Name Plate").AddComponent<TextMesh>();
+        namePlate.transform.SetParent(gameObject.transform);
+        namePlate.text = gameObject.name;
+        namePlate.transform.localPosition = new Vector3(0, -1.2f, 0);
+        namePlate.anchor = TextAnchor.MiddleCenter;
+        namePlate.alignment = TextAlignment.Center;
+        namePlate.color = Color.white;
+        namePlate.fontSize = 10;
     }
 
     /*

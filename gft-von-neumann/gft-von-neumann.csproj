@@ -87,6 +87,10 @@
     <Compile Include="Assets\Scripts\SolarSystem.cs" />
     <Compile Include="Assets\Scripts\SpaceObjects.cs" />
     <Compile Include="Assets\Scripts\Star.cs" />
+    <Compile Include="Assets\Scripts\TextAssetManager.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\Data\starNames1.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
