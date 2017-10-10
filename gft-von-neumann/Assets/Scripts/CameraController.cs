@@ -38,6 +38,7 @@ public class CameraController : MonoBehaviour
 		ChangeZoom();
 		ChangePosition();
 		ChangeRotation();
+		
 	}
 
 	public void MoveTo(Vector3 position)

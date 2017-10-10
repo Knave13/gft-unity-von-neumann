@@ -53,6 +53,7 @@ public class Galaxy : MonoBehaviour {
 			Destroy(gameObject.gameObject);
 		}
 		pathViewButton.interactable = false;
+		GUIManagement.Instance.NamePlates.Clear();
 	}
 
 	public void CreateGalaxy()
@@ -184,7 +185,10 @@ public class Galaxy : MonoBehaviour {
 	{
 		SelectionIcon.SetActive(true);
 		SelectionIcon.transform.position = hit.transform.position;
-		SelectionIcon.transform.rotation = CameraController.CurrentAngle;
+		//SelectionIcon.transform.rotation = CameraController.CurrentAngle;
+		
+		var eulerAngles = SelectionIcon.transform.localEulerAngles;
+		SelectionIcon.transform.LookAt(Camera.main.transform);
 	}
 
 	public Star GetStarByGameObject(GameObject gameObject)

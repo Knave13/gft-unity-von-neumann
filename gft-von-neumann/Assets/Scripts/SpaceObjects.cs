@@ -52,7 +52,7 @@ public class SpaceObjects {
     public static void AddStarToCoursePath(GameObject course, Vector3 starPosition)
     {
         course.GetComponent<CoursePath>().AddPoint(starPosition);
-        if (course.GetComponent<CoursePath>().vertexCount == 1)
+        if (course.GetComponent<CoursePath>().vertexCount == 2)
         {
             course.SetActive(true);
         }
@@ -60,7 +60,8 @@ public class SpaceObjects {
 
     public static void CreateNamePlate(GameObject gameObject)
     {
-        TextMesh namePlate = new GameObject(gameObject.name + " Name Plate").AddComponent<TextMesh>();
+        var namePlateGameObject = new GameObject(gameObject.name + " Name Plate");
+        TextMesh namePlate = namePlateGameObject.AddComponent<TextMesh>();
         namePlate.transform.SetParent(gameObject.transform);
         namePlate.text = gameObject.name;
         namePlate.transform.localPosition = new Vector3(0, -1.2f, 0);
@@ -68,6 +69,8 @@ public class SpaceObjects {
         namePlate.alignment = TextAlignment.Center;
         namePlate.color = Color.white;
         namePlate.fontSize = 10;
+
+        GUIManagement.Instance.NamePlates.Add(namePlateGameObject);
     }
 
     /*

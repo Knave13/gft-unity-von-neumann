@@ -55,11 +55,14 @@
      <Compile Include="Assets\Scripts\Circle.cs" />
      <Compile Include="Assets\Scripts\CoursePath.cs" />
      <Compile Include="Assets\Scripts\Galaxy.cs" />
+     <Compile Include="Assets\Scripts\GUIManagement.cs" />
      <Compile Include="Assets\Scripts\PlanetaryObject.cs" />
      <Compile Include="Assets\Scripts\PositionMath.cs" />
      <Compile Include="Assets\Scripts\SolarSystem.cs" />
      <Compile Include="Assets\Scripts\SpaceObjects.cs" />
      <Compile Include="Assets\Scripts\Star.cs" />
+     <Compile Include="Assets\Scripts\TextAssetManager.cs" />
+     <None Include="Assets\Data\starNames1.txt" />
  <Reference Include="UnityEngine.Analytics">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
