@@ -36,6 +36,10 @@ public class Galaxy : MonoBehaviour {
 		PathView = false;
 		CreateSelectionIcon();
 		CreateGalaxy();
+
+		var Data = new HttpRequest();
+
+		Debug.Log(Data.GetUser(0));
 	}
 	
 	// Update is called once per frame

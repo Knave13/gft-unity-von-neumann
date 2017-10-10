@@ -82,6 +82,7 @@
     <Compile Include="Assets\Scripts\Circle.cs" />
     <Compile Include="Assets\Scripts\CoursePath.cs" />
     <Compile Include="Assets\Scripts\Galaxy.cs" />
+    <Compile Include="Assets\Scripts\HttpRequest.cs" />
     <Compile Include="Assets\Scripts\PlanetaryObject.cs" />
     <Compile Include="Assets\Scripts\PositionMath.cs" />
     <Compile Include="Assets\Scripts\SolarSystem.cs" />
