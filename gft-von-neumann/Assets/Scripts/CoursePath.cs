@@ -12,13 +12,11 @@ public class CoursePath : MonoBehaviour {
 	
 	private void Awake()
 	{
-		Debug.Log("CoursePath Awake Called");
 		lineRenderer = GetComponent<LineRenderer>();
 	}
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("CoursePath Start Called");
 		lineRenderer.widthMultiplier = lineWidth;
 		lineRenderer.loop = false;
 		SetColor(_defaultColor, _defaultColor);

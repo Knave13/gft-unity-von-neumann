@@ -39,7 +39,8 @@ public class Galaxy : MonoBehaviour {
 
 		var Data = new HttpRequest();
 
-		Debug.Log(Data.GetUser(0));
+		Debug.Log(Data.HttpGet(Data.url));
+		Debug.Log(Data.GetJson(Data.url));
 	}
 	
 	// Update is called once per frame

@@ -76,19 +76,25 @@
     <Reference Include="UnityEngine.HoloLens">
       <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
     </Reference>
+    <Reference Include="LitJson">
+      <HintPath>Assets\LitJson.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\CameraController.cs" />
-    <Compile Include="Assets\Scripts\Circle.cs" />
     <Compile Include="Assets\Scripts\CoursePath.cs" />
-    <Compile Include="Assets\Scripts\Galaxy.cs" />
-    <Compile Include="Assets\Scripts\HttpRequest.cs" />
-    <Compile Include="Assets\Scripts\PlanetaryObject.cs" />
-    <Compile Include="Assets\Scripts\PositionMath.cs" />
-    <Compile Include="Assets\Scripts\SolarSystem.cs" />
-    <Compile Include="Assets\Scripts\SpaceObjects.cs" />
-    <Compile Include="Assets\Scripts\Star.cs" />
-    <Compile Include="Assets\Scripts\TextAssetManager.cs" />
+    <Compile Include="Assets\Scripts\Empire\Fleet.cs" />
+    <Compile Include="Assets\Scripts\Empire\Ship.cs" />
+    <Compile Include="Assets\Scripts\Helpers\Circle.cs" />
+    <Compile Include="Assets\Scripts\Helpers\GUIManagement.cs" />
+    <Compile Include="Assets\Scripts\Helpers\HttpRequest.cs" />
+    <Compile Include="Assets\Scripts\Helpers\PositionMath.cs" />
+    <Compile Include="Assets\Scripts\Helpers\TextAssetManager.cs" />
+    <Compile Include="Assets\Scripts\Space\Galaxy.cs" />
+    <Compile Include="Assets\Scripts\Space\PlanetaryObject.cs" />
+    <Compile Include="Assets\Scripts\Space\SolarSystem.cs" />
+    <Compile Include="Assets\Scripts\Space\SpaceObjects.cs" />
+    <Compile Include="Assets\Scripts\Space\Star.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Data\starNames1.txt" />

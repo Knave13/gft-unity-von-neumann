@@ -114,5 +114,6 @@ public class SolarSystem : MonoBehaviour {
 		galaxyViewButton.interactable = false;
 		pathViewButton.interactable = true;
 		SystemDetailsText.text = string.Empty;
+		GUIManagement.Instance.NamePlates.Clear();
 	}
 }
