@@ -1,7 +1,5 @@
-Temp
-obj
+/Temp
+/obj
 *.log
-Library/metadata
-Library/UnitAssemblies
-Library/ScriptAssemblies
-Library/ShaderCache
+/Debug
+/Library

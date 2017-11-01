@@ -12,6 +12,8 @@ public class HttpRequest //: MonoBehaviour
 	private JsonData _itemData;
 	private string _username = "test@test.com";
 	private string _password = "test1313";
+	private string firestoreUrl = "https://firestore.googleapis.com/v1beta1/projects/my-firebase-app-2a731/databases/(default)/documents";
+	private string firestoreKey = "AIzaSyB01keRrMpnj6CpdhFPotNhjN8mei8JYvU";
 
 	public IEnumerator GetData(string parameter)
 	{
@@ -58,5 +60,17 @@ public class HttpRequest //: MonoBehaviour
 		_itemData = JsonMapper.ToObject(HttpGet(url));
 
 		return _itemData["galaxies"][0]["name"].ToString();
+	}
+
+	public string GetGalaxy(string id)
+	{
+		// https://firestore.googleapis.com/v1beta1/projects/my-firebase-app-2a731/databases/(default)/documents/galaxies/Fqcxy7aKiISZmUMICPFE?key=AIzaSyB01keRrMpnj6CpdhFPotNhjN8mei8JYvU
+		// https://firestore.googleapis.com/v1beta1/projects/my-firebase-app-2a731/databases/(default)/documents/galaxies/Fqcxy7aKiISZmUMICPFE?key=AIzaSyB01keRrMpnj6CpdhFPotNhjN8mei8JYvU
+		string url = string.Concat(firestoreUrl + "/galaxies/" + id + "?key=" + firestoreKey);
+		Debug.Log (url);
+		var data = JsonMapper.ToObject (HttpGet (url));
+		Debug.Log (data.ToJson ());
+
+		return data ["fields"] ["name"].ToString();
 	}
 }

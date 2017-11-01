@@ -20,7 +20,7 @@ coverage
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-build/Release
+/build/Release
 
 # Dependency directory
 # https://www.npmjs.org/doc/misc/npm-faq.html#should-i-check-my-node_modules-folder-into-git-
@@ -29,8 +29,8 @@ node_modules
 # Debug log from npm
 npm-debug.log
 
-git-von-neumann/Library
-git-von-neumann/Temp
-git-von-neumann/obj
+/git-von-neumann/Library
+/git-von-neumann/Temp
+/git-von-neumann/obj
 
 Temp
